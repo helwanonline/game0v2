@@ -24,6 +24,21 @@ const AboutPage = lazy(() => import('./pages/AboutPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 const DosGamePlayerPage = lazy(() => import('./pages/DosGamePlayerPage'));
 
+const accentColors = ['#2F81F7', '#3FB950', '#F7B92F', '#A371F7', '#E85382'];
+
+function lightenHexColor(hex: string, percent: number): string {
+    hex = hex.replace(/^#/, '');
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+
+    const newR = Math.min(255, Math.floor(r * (1 + percent / 100)));
+    const newG = Math.min(255, Math.floor(g * (1 + percent / 100)));
+    const newB = Math.min(255, Math.floor(b * (1 + percent / 100)));
+
+    return `#${newR.toString(16).padStart(2, '0')}${newG.toString(16).padStart(2, '0')}${newB.toString(16).padStart(2, '0')}`;
+}
+
 function App() {
   const [language, setLanguage] = useState<Language>(() => (localStorage.getItem('language') as Language) || 'ar');
   const [route, setRoute] = useState(window.location.hash || '#/');
@@ -35,6 +50,24 @@ function App() {
     document.body.className = `bg-primary ${language === 'ar' ? 'font-cairo' : 'font-poppins'}`;
     localStorage.setItem('language', language);
   }, [language]);
+
+  useEffect(() => {
+    let colorIndex = 0;
+    const intervalId = setInterval(() => {
+      colorIndex = (colorIndex + 1) % accentColors.length;
+      const newColor = accentColors[colorIndex];
+      const newHoverColor = lightenHexColor(newColor, 20);
+      document.documentElement.style.setProperty('--color-accent-dynamic', newColor);
+      document.documentElement.style.setProperty('--color-accent-hover-dynamic', newHoverColor);
+    }, 30000); // Change every 30 seconds
+    
+    // Set initial color
+    document.documentElement.style.setProperty('--color-accent-dynamic', accentColors[0]);
+    document.documentElement.style.setProperty('--color-accent-hover-dynamic', lightenHexColor(accentColors[0], 20));
+
+
+    return () => clearInterval(intervalId);
+  }, []);
 
   useEffect(() => {
     const handleHashChange = () => {

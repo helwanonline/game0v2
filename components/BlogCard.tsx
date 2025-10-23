@@ -1,3 +1,4 @@
+
 import React from 'react';
 import type { Post, Language } from '../types';
 
@@ -17,11 +18,20 @@ const formatDate = (dateString: string, lang: Language) => {
 export const BlogCard: React.FC<BlogCardProps> = ({ post, language }) => {
     const title = language === 'ar' ? post.title_ar : post.title_en;
     const excerpt = language === 'ar' ? post.excerpt_ar : post.excerpt_en;
+
+    const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+        e.currentTarget.src = 'https://placehold.co/800x450/0D1117/8B949E?text=Error';
+    };
     
     return (
         <a href={`#/blog/${post.slug}`} className="block bg-secondary rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-glow hover:-translate-y-2 flex flex-col group">
             <div className="relative w-full aspect-[16/9] overflow-hidden">
-                 <img src={post.imageUrl} alt={title} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                 <img 
+                    src={post.imageUrl} 
+                    alt={title} 
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    onError={handleImageError}
+                 />
             </div>
             <div className="p-5 flex flex-col flex-grow">
                 <div className="flex items-center justify-between text-xs text-dark-text mb-2">

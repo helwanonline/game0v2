@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Category, CATEGORY_TRANSLATIONS, Language } from '../types';
 
@@ -6,13 +5,14 @@ interface FilterBarProps {
   activeCategory: Category | 'All';
   setActiveCategory: (category: Category | 'All') => void;
   language: Language;
+  isLoading?: boolean;
 }
 
 const ALL_CATEGORIES = Object.values(Category);
 
-export const FilterBar: React.FC<FilterBarProps> = ({ activeCategory, setActiveCategory, language }) => {
+export const FilterBar: React.FC<FilterBarProps> = ({ activeCategory, setActiveCategory, language, isLoading = false }) => {
   const buttonClasses = (isActive: boolean) =>
-    `px-4 py-2 text-sm font-semibold rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent ${
+    `px-4 py-2 text-sm font-semibold rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent disabled:opacity-50 disabled:cursor-not-allowed ${
       isActive
         ? 'bg-accent text-white shadow-md'
         : 'bg-secondary text-dark-text hover:bg-gray-700 hover:text-light-text'
@@ -24,6 +24,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({ activeCategory, setActiveC
         <button
           onClick={() => setActiveCategory('All')}
           className={buttonClasses(activeCategory === 'All')}
+          disabled={isLoading}
         >
           {language === 'ar' ? 'الكل' : 'All'}
         </button>
@@ -32,6 +33,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({ activeCategory, setActiveC
             key={category}
             onClick={() => setActiveCategory(category)}
             className={buttonClasses(activeCategory === category)}
+            disabled={isLoading}
           >
             {CATEGORY_TRANSLATIONS[category][language]}
           </button>

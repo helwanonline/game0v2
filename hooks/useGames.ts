@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import type { Game } from '../types';
+import { supabase } from '../lib/supabaseClient';
 
 export const useGames = () => {
   const [games, setGames] = useState<Game[]>([]);
@@ -10,18 +11,26 @@ export const useGames = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch('/api/games.json');
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const data: { games: Game[] } = await response.json();
-      
-      if (!Array.isArray(data.games)) {
-        throw new Error("Fetched data is not in the expected format (missing 'games' array).");
+      let data: Game[] | null = null;
+      if (supabase) {
+        const { data: supabaseData, error: supabaseError } = await supabase
+          .from('games')
+          .select('*')
+          .order('playCount', { ascending: false });
+
+        if (supabaseError) throw new Error(`Supabase error: ${supabaseError.message}`);
+        data = supabaseData as Game[];
+      } else {
+        // Fallback to local JSON
+        const response = await fetch('/api/games.json');
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const jsonData = await response.json();
+        data = jsonData.games;
       }
 
-      const sortedGames = [...data.games].sort((a, b) => b.playCount - a.playCount);
-      setGames(sortedGames);
+      if (!data) throw new Error("No game data found.");
+      
+      setGames(data);
     } catch (e) {
       if (e instanceof Error) {
         setError(e.message);

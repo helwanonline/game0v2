@@ -1,3 +1,13 @@
+import React from 'react';
+import { ActionIcon } from './components/icons/ActionIcon';
+import { AdventureIcon } from './components/icons/AdventureIcon';
+import { PuzzleIcon } from './components/icons/PuzzleIcon';
+import { SportsIcon } from './components/icons/SportsIcon';
+import { RacingIcon } from './components/icons/RacingIcon';
+import { SparklesIcon } from './components/icons/SparklesIcon';
+import { StrategyIcon } from './components/icons/StrategyIcon';
+import { ClassicIcon } from './components/icons/ClassicIcon';
+
 export enum Category {
   Action = 'Action',
   Adventure = 'Adventure',
@@ -20,15 +30,15 @@ export const CATEGORY_TRANSLATIONS: Record<Category, { en: string; ar: string }>
   [Category.Classic]: { en: 'Classic', ar: 'كلاسيك' },
 };
 
-export const CATEGORY_DETAILS: Record<Category, { en: string; ar: string; slug: string }> = {
-  [Category.Action]: { en: 'Action', ar: 'أكشن', slug: 'action-games' },
-  [Category.Adventure]: { en: 'Adventure', ar: 'مغامرات', slug: 'adventure-games' },
-  [Category.Puzzle]: { en: 'Puzzle', ar: 'ذكاء', slug: 'puzzle-games' },
-  [Category.Sports]: { en: 'Sports', ar: 'رياضة', slug: 'sports-games' },
-  [Category.Racing]: { en: 'Racing', ar: 'سيارات', slug: 'car-games' },
-  [Category.Girls]: { en: 'Girls', ar: 'بنات', slug: 'girls-games' },
-  [Category.Strategy]: { en: 'Strategy', ar: 'استراتيجية', slug: 'strategy-games' },
-  [Category.Classic]: { en: 'Classic', ar: 'كلاسيك', slug: 'classic-games' },
+export const CATEGORY_DETAILS: Record<Category, { en: string; ar: string; slug: string; icon: React.FC<{className?: string}> }> = {
+  [Category.Action]: { en: 'Action', ar: 'أكشن', slug: 'action-games', icon: ActionIcon },
+  [Category.Adventure]: { en: 'Adventure', ar: 'مغامرات', slug: 'adventure-games', icon: AdventureIcon },
+  [Category.Puzzle]: { en: 'Puzzle', ar: 'ذكاء', slug: 'puzzle-games', icon: PuzzleIcon },
+  [Category.Sports]: { en: 'Sports', ar: 'رياضة', slug: 'sports-games', icon: SportsIcon },
+  [Category.Racing]: { en: 'Racing', ar: 'سيارات', slug: 'car-games', icon: RacingIcon },
+  [Category.Girls]: { en: 'Girls', ar: 'بنات', slug: 'girls-games', icon: SparklesIcon },
+  [Category.Strategy]: { en: 'Strategy', ar: 'استراتيجية', slug: 'strategy-games', icon: StrategyIcon },
+  [Category.Classic]: { en: 'Classic', ar: 'كلاسيك', slug: 'classic-games', icon: ClassicIcon },
 };
 
 
@@ -45,6 +55,7 @@ export type Game = {
   playCount: number;
   gameUrl: string;
   engine: 'html5' | 'dos';
+  rating: number;
 };
 
 export type Language = 'ar' | 'en';

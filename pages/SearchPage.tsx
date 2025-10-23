@@ -1,7 +1,9 @@
+
 import React, { useMemo } from 'react';
 import { useGames } from '../hooks/useGames';
 import { GameGrid } from '../components/GameGrid';
 import type { Game, Language } from '../types';
+import { CATEGORY_TRANSLATIONS } from '../types';
 import { SEO } from '../components/SEO';
 import { ErrorMessage } from '../components/ErrorMessage';
 
@@ -16,11 +18,18 @@ export const SearchPage: React.FC<SearchPageProps> = ({ query, language, onPlay 
 
   const searchResults = useMemo(() => {
     if (!query) return [];
-    const lowerCaseQuery = query.toLowerCase();
-    return games.filter(game => 
-      game.name_en.toLowerCase().includes(lowerCaseQuery) ||
-      game.name_ar.toLowerCase().includes(lowerCaseQuery)
-    );
+    const lowerCaseQuery = query.toLowerCase().trim();
+    return games.filter(game => {
+      const tagsMatch = game.tags.some(tag => tag.toLowerCase().includes(lowerCaseQuery));
+      const categoryEnMatch = game.category.toLowerCase().includes(lowerCaseQuery);
+      const categoryArMatch = CATEGORY_TRANSLATIONS[game.category].ar.toLowerCase().includes(lowerCaseQuery);
+
+      return game.name_en.toLowerCase().includes(lowerCaseQuery) ||
+             game.name_ar.toLowerCase().includes(lowerCaseQuery) ||
+             tagsMatch ||
+             categoryEnMatch ||
+             categoryArMatch;
+    });
   }, [games, query]);
 
   const pageTitle = language === 'ar' ? `نتائج البحث عن: "${query}"` : `Search results for: "${query}"`;

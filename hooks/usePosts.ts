@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import type { Post } from '../types';
+import { supabase } from '../lib/supabaseClient';
 
 export const usePosts = () => {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -10,14 +11,26 @@ export const usePosts = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch('/api/posts.json');
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      let data: Post[] | null = null;
+      if (supabase) {
+        const { data: supabaseData, error: supabaseError } = await supabase
+          .from('posts')
+          .select('*')
+          .order('publishedAt', { ascending: false });
+        
+        if (supabaseError) throw new Error(`Supabase error: ${supabaseError.message}`);
+        data = supabaseData as Post[];
+      } else {
+        // Fallback to local JSON
+        const response = await fetch('/api/posts.json');
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const jsonData = await response.json();
+        data = jsonData.posts;
       }
-      const data: { posts: Post[] } = await response.json();
-      // Sort by date descending to show newest first
-      const sortedPosts = data.posts.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
-      setPosts(sortedPosts);
+
+      if (!data) throw new Error("No post data found.");
+
+      setPosts(data as Post[]);
     } catch (e) {
       if (e instanceof Error) {
         setError(e.message);

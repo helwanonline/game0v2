@@ -1,3 +1,4 @@
+
 import React from 'react';
 import type { Game, Language } from '../types';
 import { PlayIcon } from './icons/PlayIcon';
@@ -13,6 +14,12 @@ export const FeaturedGame: React.FC<FeaturedGameProps> = ({ game, language, onPl
   const title = language === 'ar' ? game.name_ar : game.name_en;
   const description = language === 'ar' ? game.description_ar : game.description_en;
 
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    e.currentTarget.src = 'https://placehold.co/1280x720/0D1117/8B949E?text=Image+Not+Found';
+    e.currentTarget.style.objectPosition = 'center';
+  };
+
+
   return (
     <section className="relative rounded-xl overflow-hidden text-white min-h-[300px] md:min-h-[400px] flex items-end p-6 md:p-10 shadow-lg">
       <div className="absolute inset-0">
@@ -20,6 +27,7 @@ export const FeaturedGame: React.FC<FeaturedGameProps> = ({ game, language, onPl
           src={game.thumbnailUrl}
           alt={title}
           className="w-full h-full object-cover object-center"
+          onError={handleImageError}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
       </div>

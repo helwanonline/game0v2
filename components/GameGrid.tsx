@@ -14,6 +14,7 @@ interface GameGridProps {
 
 export const GameGrid: React.FC<GameGridProps> = ({ games, language, onPlay, isLoading, gamesPerPage = 24 }) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const totalPages = Math.ceil(games.length / gamesPerPage);
 
   const paginatedGames = useMemo(() => {
@@ -22,10 +23,16 @@ export const GameGrid: React.FC<GameGridProps> = ({ games, language, onPlay, isL
     return games.slice(startIndex, startIndex + gamesPerPage);
   }, [games, currentPage, gamesPerPage]);
   
-  // Reset page to 1 when the source list of games changes
+  // Reset page to 1 and trigger transition when the source list of games changes
   useEffect(() => {
-      setCurrentPage(1);
-  }, [games]);
+    setCurrentPage(1);
+    // Create a subtle fade transition when the list of games updates.
+    if (!isLoading) {
+      setIsTransitioning(true);
+      const timer = setTimeout(() => setIsTransitioning(false), 300); // Duration matches transition
+      return () => clearTimeout(timer);
+    }
+  }, [games, isLoading]);
 
   if (isLoading) {
     return (
@@ -43,7 +50,7 @@ export const GameGrid: React.FC<GameGridProps> = ({ games, language, onPlay, isL
 
   return (
     <>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-6">
+      <div className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-6 transition-opacity duration-300 ${isTransitioning ? 'opacity-50' : 'opacity-100'}`}>
         {paginatedGames.map((game) => (
           <GameCard 
             key={game.id} 

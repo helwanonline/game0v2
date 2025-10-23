@@ -22,6 +22,9 @@ export const Footer: React.FC<FooterProps> = ({ language }) => {
             <a href="#/about" className="hover:text-light-text transition-colors">{language === 'ar' ? 'من نحن' : 'About Us'}</a>
             <a href="#/contact" className="hover:text-light-text transition-colors">{language === 'ar' ? 'اتصل بنا' : 'Contact Us'}</a>
           </div>
+          <p className="text-xs mt-6 max-w-lg mx-auto">
+            {language === 'ar' ? 'جميع الألعاب على 5199.online منسقة بعناية لتوفير تجربة آمنة وممتعة ومناسبة للعائلة.' : 'All games on 5199.online are carefully curated to provide a safe, fun, and family-friendly experience.'}
+          </p>
         </div>
       </div>
     </footer>

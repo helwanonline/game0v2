@@ -27,13 +27,13 @@
             colors: {
               primary: '#0D1117',
               secondary: '#161B22',
-              accent: '#2F81F7',
-              'accent-hover': '#58A6FF',
+              accent: 'var(--color-accent-dynamic, #2F81F7)',
+              'accent-hover': 'var(--color-accent-hover-dynamic, #58A6FF)',
               'light-text': '#C9D1D9',
               'dark-text': '#8B949E',
             },
             boxShadow: {
-              'glow': '0 0 15px rgba(47, 129, 247, 0.4)',
+              'glow': '0 0 15px var(--color-accent-dynamic, #2F81F766)',
             }
           }
         }
@@ -47,7 +47,8 @@
     "react/": "https://aistudiocdn.com/react@^19.2.0/",
     "react": "https://aistudiocdn.com/react@^19.2.0",
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.4"
+    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.4",
+    "@supabase/supabase-js": "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm"
   }
 }
 </script>

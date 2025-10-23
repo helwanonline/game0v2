@@ -51,6 +51,10 @@ export const BlogPostPage: React.FC<BlogPostPageProps> = ({ slug, language }) =>
     const shareTitle = title;
     const description = language === 'ar' ? post.excerpt_ar : post.excerpt_en;
 
+    const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+        e.currentTarget.src = 'https://placehold.co/1280x720/0D1117/8B949E?text=Image+Not+Found';
+    };
+
     return (
         <>
             <SEO
@@ -76,7 +80,12 @@ export const BlogPostPage: React.FC<BlogPostPageProps> = ({ slug, language }) =>
                                 <span>{language === 'ar' ? `قراءة ${post.readingTime} دقائق` : `${post.readingTime} min read`}</span>
                             </div>
                         </div>
-                        <img src={post.imageUrl} alt={title} className="w-full h-auto max-h-[500px] object-cover rounded-xl my-8" />
+                        <img 
+                            src={post.imageUrl} 
+                            alt={title} 
+                            className="w-full h-auto max-h-[500px] object-cover rounded-xl my-8" 
+                            onError={handleImageError}
+                        />
                         <div className="flex justify-center gap-2">
                             <ShareButtons url={shareUrl} title={shareTitle} />
                         </div>

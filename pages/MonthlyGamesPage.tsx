@@ -51,7 +51,12 @@ export const MonthlyGamesPage: React.FC<MonthlyGamesPageProps> = ({ language, on
           </p>
         </div>
 
-        <FilterBar activeCategory={activeCategory} setActiveCategory={setActiveCategory} language={language} />
+        <FilterBar 
+            activeCategory={activeCategory} 
+            setActiveCategory={setActiveCategory} 
+            language={language}
+            isLoading={loading}
+        />
         
         {error ? (
           <ErrorMessage message={error} onRetry={refetch} language={language} />

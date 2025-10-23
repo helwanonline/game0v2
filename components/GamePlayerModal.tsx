@@ -48,6 +48,7 @@ export const GamePlayerModal: React.FC<GamePlayerModalProps> = ({ isOpen, game, 
   }
 
   const gameName = language === 'ar' ? game.name_ar : game.name_en;
+  const gameDescription = language === 'ar' ? game.description_ar : game.description_en;
   const shareUrl = `${window.location.origin}${window.location.pathname}#/games/${game.slug}`;
   const shareTitle = language === 'ar' ? `العب ${gameName} على 5199.online!` : `Play ${gameName} on 5199.online!`;
   const isPreloaded = isGamePreloaded(game.gameUrl);
@@ -113,6 +114,11 @@ export const GamePlayerModal: React.FC<GamePlayerModalProps> = ({ isOpen, game, 
             onLoad={() => setIsIframeLoading(false)}
           ></iframe>
         </div>
+        {gameDescription && (
+            <div className="flex-shrink-0 p-4 border-t border-gray-700 max-h-24 sm:max-h-28 overflow-y-auto bg-primary">
+                <p className="text-sm text-dark-text leading-relaxed">{gameDescription}</p>
+            </div>
+        )}
          <footer className="sm:hidden flex items-center justify-center p-2 bg-primary border-t border-gray-700">
             <ShareButtons url={shareUrl} title={shareTitle} />
         </footer>

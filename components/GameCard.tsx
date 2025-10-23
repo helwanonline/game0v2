@@ -1,5 +1,5 @@
 
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import type { Game, Language } from '../types';
 import { CATEGORY_TRANSLATIONS } from '../types';
 import { PlayIcon } from './icons/PlayIcon';
@@ -8,6 +8,7 @@ import { HeartIcon } from './icons/HeartIcon';
 import { HeartOutlineIcon } from './icons/HeartOutlineIcon';
 import { useInView } from '../hooks/useInView';
 import { useGamePreloader } from '../context/GamePreloaderContext';
+import { Rating } from './Rating';
 
 interface GameCardProps {
   game: Game;
@@ -28,7 +29,6 @@ const formatPlayCount = (count: number, lang: Language) => {
 };
 
 export const GameCard: React.FC<GameCardProps> = ({ game, language, onPlay }) => {
-  const [imgSrc, setImgSrc] = useState(game.thumbnailUrl);
   const { isFavorite, toggleFavorite } = useContext(FavoritesContext);
 
   const { ref, inView } = useInView({
@@ -54,15 +54,15 @@ export const GameCard: React.FC<GameCardProps> = ({ game, language, onPlay }) =>
   };
 
 
-  const handleImageError = () => {
-    setImgSrc('/placeholder.png');
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    e.currentTarget.src = 'https://placehold.co/400x400/0D1117/8B949E?text=Error';
   };
 
   return (
     <div onClick={handleCardClick} data-testid={`game-card-${game.id}`} ref={ref} className="cursor-pointer bg-secondary rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-glow hover:-translate-y-2 flex flex-col group">
       <div className="relative w-full aspect-square">
         <img
-          src={imgSrc}
+          src={game.thumbnailUrl}
           alt={language === 'ar' ? game.name_ar : game.name_en}
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
           loading="lazy"
@@ -79,12 +79,13 @@ export const GameCard: React.FC<GameCardProps> = ({ game, language, onPlay }) =>
         </div>
       </div>
       <div className="p-3 flex flex-col flex-grow">
-        <h3 className="text-base font-bold text-light-text truncate">
+        <h3 className="text-base font-bold text-light-text truncate mb-1">
           {language === 'ar' ? game.name_ar : game.name_en}
         </h3>
-        <p className="text-xs text-dark-text mb-2">
-          {CATEGORY_TRANSLATIONS[game.category][language]}
-        </p>
+        <div className="flex items-center justify-between text-xs text-dark-text mb-2">
+           <span>{CATEGORY_TRANSLATIONS[game.category][language]}</span>
+           {game.rating && <Rating rating={game.rating} />}
+        </div>
          <div className="flex flex-wrap gap-1 mb-3">
           {game.tags.slice(0, 2).map(tag => (
             <a key={tag} href={`#/search?q=${encodeURIComponent(tag)}`} onClick={(e) => handleTagClick(e, tag)} className="text-xs bg-gray-700 text-dark-text px-2 py-0.5 rounded-full hover:bg-accent hover:text-white transition-colors">
