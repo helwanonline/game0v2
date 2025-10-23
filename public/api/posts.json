@@ -1,0 +1,64 @@
+{
+  "posts": [
+    {
+      "slug": "best-browser-games-no-download",
+      "title_en": "Top 5 Browser Games You Can Play Without Downloading",
+      "title_ar": "أفضل 5 ألعاب متصفح يمكنك لعبها بدون تحميل",
+      "excerpt_en": "No need to wait for downloads! Jump straight into the action with these amazing browser-based games that work on any device.",
+      "excerpt_ar": "لا حاجة لانتظار التحميلات! انطلق مباشرة إلى الإثارة مع هذه الألعاب الرائعة التي تعمل مباشرة من المتصفح على أي جهاز.",
+      "content_en": "The world of browser games has evolved significantly. Gone are the days of simple Flash games. Today, you can find stunning 3D graphics, complex gameplay, and massive multiplayer experiences, all running directly in your browser. In this article, we explore five of the best games that require no installation, saving you time and disk space. From fast-paced shooters to relaxing puzzle games, there's something here for everyone.",
+      "content_ar": "لقد تطور عالم ألعاب المتصفح بشكل كبير. ولت أيام ألعاب الفلاش البسيطة. اليوم، يمكنك العثور على رسومات ثلاثية الأبعاد مذهلة، وأسلوب لعب معقد، وتجارب متعددة اللاعبين ضخمة، وكلها تعمل مباشرة في متصفحك. في هذا المقال، نستكشف خمس من أفضل الألعاب التي لا تتطلب أي تثبيت، مما يوفر لك الوقت ومساحة القرص. من ألعاب إطلاق النار سريعة الوتيرة إلى ألعاب الألغاز المريحة، هناك شيء للجميع هنا.",
+      "imageUrl": "/blog/post1.png",
+      "publishedAt": "2024-05-20", "author": "GameMaster",
+      "tags": ["Browser Games", "No Download", "Gaming"], "readingTime": 3
+    },
+    {
+      "slug": "lightweight-games-for-mobile",
+      "title_en": "Quick & Light Games for Your Phone",
+      "title_ar": "ألعاب خفيفة وسريعة لهاتفك",
+      "excerpt_en": "Got an older phone or limited data? These HTML5 games are lightweight, load instantly, and are perfect for a quick gaming session.",
+      "excerpt_ar": "هل لديك هاتف قديم أو باقة إنترنت محدودة؟ هذه الألعاب خفيفة الوزن، يتم تحميلها على الفور، وهي مثالية لجلسة لعب سريعة.",
+      "content_en": "Not everyone has the latest flagship smartphone. If you're looking for games that won't tax your hardware or consume your entire data plan, you've come to the right place. We've compiled a list of fantastic HTML5 games that are optimized for performance on a wide range of devices. They are perfect for commuting, waiting in line, or any time you need a quick dose of fun without the hassle.",
+      "content_ar": "ليس كل شخص يمتلك أحدث هاتف ذكي. إذا كنت تبحث عن ألعاب لا ترهق جهازك أو تستهلك باقة الإنترنت بالكامل، فقد وصلت إلى المكان الصحيح. لقد قمنا بتجميع قائمة من ألعاب HTML5 الرائعة والمحسنة للأداء على مجموعة واسعة من الأجهزة. إنها مثالية للتنقل، أو الانتظار في طابور، أو في أي وقت تحتاج فيه إلى جرعة سريعة من المرح دون عناء.",
+      "imageUrl": "/blog/post2.png",
+      "publishedAt": "2024-05-15", "author": "TechGuru",
+      "tags": ["Mobile", "HTML5", "Lightweight"], "readingTime": 2
+    },
+    {
+      "slug": "rise-of-open-source-gaming",
+      "title_en": "The Rise of Open Source Gaming",
+      "title_ar": "صعود الألعاب مفتوحة المصدر",
+      "excerpt_en": "Discover the world of open-source games. Play, learn, and even contribute to amazing projects created by a global community.",
+      "excerpt_ar": "اكتشف عالم الألعاب مفتوحة المصدر. العب، تعلم، وحتى ساهم في مشاريع مذهلة تم إنشاؤها بواسطة مجتمع عالمي.",
+      "content_en": "Open source is not just for software applications; it has a thriving community in the gaming world as well. These games offer complete transparency, allowing you to look at the code, modify it, and learn how games are made. Many open-source games have passionate communities that continually add new features and content. This article highlights some of the most impressive open-source gaming projects you can download and play for free today.",
+      "content_ar": "المصدر المفتوح ليس فقط لتطبيقات البرامج؛ بل له مجتمع مزدهر في عالم الألعاب أيضًا. توفر هذه الألعاب شفافية كاملة، مما يسمح لك بالاطلاع على الكود وتعديله وتعلم كيفية صنع الألعاب. العديد من الألعاب مفتوحة المصدر لديها مجتمعات متحمسة تضيف باستمرار ميزات ومحتوى جديدًا. يسلط هذا المقال الضوء على بعض من أروع مشاريع الألعاب مفتوحة المصدر التي يمكنك تنزيلها ولعبها مجانًا اليوم.",
+      "imageUrl": "/blog/post3.png",
+      "publishedAt": "2024-05-10", "author": "DevInsights",
+      "tags": ["Open Source", "Free Games", "Development"], "readingTime": 4
+    },
+    {
+        "slug": "ai-in-gaming-future",
+        "title_en": "How AI is Shaping the Future of Gaming",
+        "title_ar": "كيف يغير الذكاء الاصطناعي مستقبل الألعاب",
+        "excerpt_en": "From smarter NPCs to procedurally generated worlds, AI is revolutionizing game development and player experiences.",
+        "excerpt_ar": "من الشخصيات غير القابلة للعب الأكثر ذكاءً إلى العوالم التي يتم إنشاؤها إجرائيًا، يُحدث الذكاء الاصطناعي ثورة في تطوير الألعاب وتجارب اللاعبين.",
+        "content_en": "Artificial Intelligence is no longer a buzzword; it's a core component of modern game design. AI algorithms create dynamic and unpredictable non-player characters (NPCs) that react realistically to player actions. Furthermore, procedural content generation (PCG) powered by AI can create vast, unique game worlds, ensuring no two playthroughs are the same. This article explores the cutting-edge AI techniques being used today and what we can expect in the near future.",
+        "content_ar": "لم يعد الذكاء الاصطناعي مجرد كلمة طنانة؛ إنه مكون أساسي في تصميم الألعاب الحديثة. تخلق خوارزميات الذكاء الاصطناعي شخصيات غير قابلة للعب (NPCs) ديناميكية وغير متوقعة تتفاعل بشكل واقعي مع تصرفات اللاعب. علاوة على ذلك، يمكن لتوليد المحتوى الإجرائي (PCG) المدعوم بالذكاء الاصطناعي إنشاء عوالم ألعاب واسعة وفريدة من نوعها، مما يضمن عدم وجود تجربتي لعب متماثلتين. يستكشف هذا المقال أحدث تقنيات الذكاء الاصطناعي المستخدمة اليوم وما يمكن أن نتوقعه في المستقبل القريب.",
+        "imageUrl": "/blog/post4.png",
+        "publishedAt": "2024-05-25", "author": "FutureTech",
+        "tags": ["AI", "Gaming", "Technology"], "readingTime": 5
+    },
+    {
+        "slug": "top-puzzle-games-2024",
+        "title_en": "The Most Addictive Puzzle Games of 2024",
+        "title_ar": "أكثر ألعاب الألغاز إدمانًا لعام 2024",
+        "excerpt_en": "Challenge your mind with our top picks for puzzle games this year. From relaxing brain-teasers to complex logical challenges.",
+        "excerpt_ar": "تحدى عقلك مع أفضل اختياراتنا لألعاب الألغاز هذا العام. من الألغاز المريحة إلى التحديات المنطقية المعقدة.",
+        "content_en": "If you love a good mental workout, the puzzle genre has never been more diverse. This year has seen a surge in innovative puzzle games that push the boundaries of creativity. We've sifted through countless titles to bring you the best of the best. Whether you enjoy spatial reasoning, mathematical puzzles, or word games, our list has something to keep your brain engaged for hours on end.",
+        "content_ar": "إذا كنت تحب التمرين العقلي الجيد، فإن نوع الألغاز لم يكن أكثر تنوعًا من أي وقت مضى. شهد هذا العام طفرة في ألعاب الألغاز المبتكرة التي تتجاوز حدود الإبداع. لقد قمنا بفحص عدد لا يحصى من العناوين لنقدم لك الأفضل على الإطلاق. سواء كنت تستمتع بالاستدلال المكاني أو الألغاز الرياضية أو ألعاب الكلمات، فإن قائمتنا تحتوي على شيء يبقي عقلك مشغولاً لساعات.",
+        "imageUrl": "/blog/post5.png",
+        "publishedAt": "2024-05-18", "author": "PuzzleMaster",
+        "tags": ["Puzzle", "Brain Games", "Top List"], "readingTime": 4
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "games": [
+    {
+      "id": 1, "slug": "2048", "name_en": "2048", "name_ar": "2048",
+      "description_en": "Join the numbers and get to the 2048 tile! A classic puzzle for all ages.",
+      "description_ar": "اجمع الأرقام وصولاً إلى مربع 2048! لعبة ألغاز كلاسيكية لكل الأعمار.",
+      "category": "Puzzle", "tags": ["Math", "Logic", "Classic"],
+      "thumbnailUrl": "/thumbnails/2048.png", "playCount": 4500000,
+      "gameUrl": "https://play2048.co/", "engine": "html5"
+    },
+    {
+      "id": 3, "slug": "slope", "name_en": "Slope", "name_ar": "المنحدر",
+      "description_en": "Speed down a randomized slope. Avoid obstacles and keep your ball on the track.",
+      "description_ar": "انطلق بسرعة على منحدر عشوائي. تجنب العقبات وحافظ على كرتك على المسار.",
+      "category": "Action", "tags": ["3D", "Endless", "Skill"],
+      "thumbnailUrl": "/thumbnails/slope.png", "playCount": 5100000,
+      "gameUrl": "/games/slope/index.html", "engine": "html5"
+    },
+    {
+      "id": 5, "slug": "drift-boss", "name_en": "Drift Boss", "name_ar": "زعيم الدريفت",
+      "category": "Racing", "tags": ["Drifting", "Skill", "Cars"],
+      "thumbnailUrl": "/thumbnails/drift-boss.png", "playCount": 4200000,
+      "gameUrl": "https://watchdocumentaries.com/wp-content/uploads/games/drift-boss/", "engine": "html5"
+    },
+    {
+      "id": 6, "slug": "cut-the-rope", "name_en": "Cut the Rope", "name_ar": "اقطع الحبل",
+      "category": "Girls", "tags": ["Physics", "Puzzle", "Cute"],
+      "thumbnailUrl": "/thumbnails/cut-the-rope.png", "playCount": 3800000,
+      "gameUrl": "https://www.cuttherope.net/ctr/fb-test/", "engine": "html5"
+    },
+    {
+      "id": 7, "slug": "moto-x3m", "name_en": "Moto X3M", "name_ar": "موتو إكس 3 إم",
+      "category": "Racing", "tags": ["Motorbike", "Stunts", "Physics"],
+      "thumbnailUrl": "/thumbnails/moto-x3m.png", "playCount": 4900000,
+      "gameUrl": "https://moto-x3m.com/moto-x3m/index.html", "engine": "html5"
+    },
+    {
+      "id": 8, "slug": "vex-7", "name_en": "Vex 7", "name_ar": "فيكس 7",
+      "category": "Action", "tags": ["Platformer", "Stickman", "Hard"],
+      "thumbnailUrl": "/thumbnails/vex-7.png", "playCount": 3500000,
+      "gameUrl": "https://www.flashgames247.com/games/vex7/index.html", "engine": "html5"
+    },
+    {
+      "id": 9, "slug": "basketball-stars", "name_en": "Basketball Stars", "name_ar": "نجوم كرة السلة",
+      "category": "Sports", "tags": ["2 Player", "Basketball", "Sports"],
+      "thumbnailUrl": "/thumbnails/basketball-stars.png", "playCount": 3100000,
+      "gameUrl": "https://ubg98.github.io/BasketballStars/", "engine": "html5"
+    },
+    {
+      "id": 10, "slug": "fireboy-and-watergirl", "name_en": "Fireboy & Watergirl", "name_ar": "ولد النار وبنت الماء",
+      "category": "Adventure", "tags": ["2 Player", "Co-op", "Puzzle"],
+      "thumbnailUrl": "/thumbnails/fireboy-watergirl.png", "playCount": 3600000,
+      "gameUrl": "https://www.addictinggames.com/embed/html5-games/23616", "engine": "html5"
+    },
+    {
+      "id": 11, "slug": "cookie-clicker", "name_en": "Cookie Clicker", "name_ar": "نقر الكعك",
+      "category": "Girls", "tags": ["Idle", "Clicker", "Strategy"],
+      "thumbnailUrl": "/thumbnails/cookie-clicker.png", "playCount": 6200000,
+      "gameUrl": "https://orteil.dashnet.org/cookieclicker/", "engine": "html5"
+    },
+    {
+      "id": 12, "slug": "retro-bowl", "name_en": "Retro Bowl", "name_ar": "الوعاء القديم",
+      "category": "Sports", "tags": ["Football", "Pixel", "Classic"],
+      "thumbnailUrl": "/thumbnails/retro-bowl.png", "playCount": 2900000,
+      "gameUrl": "https://retrobowl.me/", "engine": "html5"
+    },
+    {
+      "id": 16, "slug": "super-mario-64", "name_en": "Super Mario 64", "name_ar": "سوبر ماريو 64",
+      "category": "Adventure", "tags": ["Platformer", "3D", "Classic"],
+      "thumbnailUrl": "/thumbnails/mario-64.png", "playCount": 7500000,
+      "gameUrl": "https://sm64web.com/web/index.html", "engine": "html5"
+    },
+    {
+      "id": 18, "slug": "subway-surfers", "name_en": "Subway Surfers", "name_ar": "صب واي سيرفرس",
+      "category": "Girls", "tags": ["Endless", "Runner", "Action"],
+      "thumbnailUrl": "/thumbnails/subway-surfers.png", "playCount": 8100000,
+      "gameUrl": "https://www.kiloo.com/subway-surfers/", "engine": "html5"
+    },
+    {
+      "id": 20, "slug": "smash-karts", "name_en": "Smash Karts", "name_ar": "سماش كارتس",
+      "category": "Racing", "tags": ["Multiplayer", "IO", "Action"],
+      "thumbnailUrl": "/thumbnails/smash-karts.png", "playCount": 3900000,
+      "gameUrl": "https://smashkarts.io/", "engine": "html5"
+    },
+    {
+      "id": 24, "slug": "minecraft-classic", "name_en": "Minecraft Classic", "name_ar": "ماين كرافت كلاسيك",
+      "category": "Adventure", "tags": ["Sandbox", "Building", "Classic"],
+      "thumbnailUrl": "/thumbnails/minecraft-classic.png", "playCount": 9200000,
+      "gameUrl": "https://classic.minecraft.net/", "engine": "html5"
+    },
+    {
+      "id": 25, "slug": "among-us", "name_en": "Among Us", "name_ar": "أمونج أس",
+      "category": "Strategy", "tags": ["Multiplayer", "Social", "Deduction"],
+      "thumbnailUrl": "/thumbnails/among-us.png", "playCount": 7800000,
+      "gameUrl": "https://ubg98.github.io/AmongUs/", "engine": "html5"
+    },
+    {
+      "id": 28, "slug": "flappy-bird", "name_en": "Flappy Bird", "name_ar": "الطائر المرفرف",
+      "category": "Girls", "tags": ["Skill", "Arcade", "Hard"],
+      "thumbnailUrl": "/thumbnails/flappy-bird.png", "playCount": 6500000,
+      "gameUrl": "https://flappybird.io/", "engine": "html5"
+    },
+    {
+      "id": 30, "slug": "8-ball-pool", "name_en": "8 Ball Pool", "name_ar": "8 بول",
+      "category": "Sports", "tags": ["Billiards", "Multiplayer", "2 Player"],
+      "thumbnailUrl": "/thumbnails/8-ball-pool.png", "playCount": 4400000,
+      "gameUrl": "https://8ballpool.com/en/game", "engine": "html5"
+    },
+    {
+      "id": 31, "slug": "prince-of-persia", "name_en": "Prince of Persia", "name_ar": "أمير بلاد فارس",
+      "description_en": "The classic 1989 platformer. Run, jump, and sword-fight your way through the dungeons to save the princess.",
+      "description_ar": "لعبة المنصات الكلاسيكية من عام 1989. اركض، اقفز، وحارب بالسيف في طريقك عبر الأبراج المحصنة لإنقاذ الأميرة.",
+      "category": "Classic", "tags": ["Retro", "Platformer", "DOS"],
+      "thumbnailUrl": "/thumbnails/prince-of-persia.png", "playCount": 1500000,
+      "gameUrl": "/dos/prince.jsdos", "engine": "dos"
+    }
+  ]
+}
