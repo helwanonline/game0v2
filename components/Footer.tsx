@@ -13,7 +13,7 @@ export const Footer: React.FC<FooterProps> = ({ language }) => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="text-center text-dark-text">
            <a href="#/">
-             <img className="h-12 w-auto mx-auto mb-4" src="https://i.ibb.co/r2zLLDB/5199-online.png" alt="5199.online Logo" />
+             <img className="h-12 w-auto mx-auto mb-4" src="https://i.postimg.cc/qRDFtvc0/5199logo.png" alt="5199.online Logo" />
            </a>
           <p>
             &copy; {year} 5199.online. {language === 'ar' ? 'جميع الحقوق محفوظة.' : 'All rights reserved.'}

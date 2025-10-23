@@ -5,10 +5,11 @@ interface UseInViewOptions {
   triggerOnce?: boolean;
 }
 
-export const useInView = (options: UseInViewOptions = {}): { ref: RefObject<HTMLDivElement>; inView: boolean } => {
+// Fix: Made the hook generic to allow the ref to be attached to different HTML element types.
+export const useInView = <T extends HTMLElement>(options: UseInViewOptions = {}): { ref: RefObject<T>; inView: boolean } => {
   const { threshold = 0.1, triggerOnce = false } = options;
   const [inView, setInView] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<T>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

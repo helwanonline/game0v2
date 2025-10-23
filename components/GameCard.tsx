@@ -31,15 +31,12 @@ const formatPlayCount = (count: number, lang: Language) => {
 export const GameCard: React.FC<GameCardProps> = ({ game, language, onPlay }) => {
   const { isFavorite, toggleFavorite } = useContext(FavoritesContext);
 
-  const { ref, inView } = useInView({
+  // Fix: Specified HTMLAnchorElement as the generic type for useInView to match the `<a>` element's ref.
+  const { ref, inView } = useInView<HTMLAnchorElement>({
     threshold: 0.1,
     triggerOnce: true,
   });
   useGamePreloader(game.gameUrl, inView);
-
-  const handleCardClick = () => {
-    onPlay(game);
-  };
   
   const handleFavorite = (e: React.MouseEvent) => {
       e.preventDefault();
@@ -47,62 +44,60 @@ export const GameCard: React.FC<GameCardProps> = ({ game, language, onPlay }) =>
       toggleFavorite(game.id);
   };
 
-  const handleTagClick = (e: React.MouseEvent, tag: string) => {
-      e.preventDefault();
-      e.stopPropagation();
-      window.location.hash = `#/search?q=${encodeURIComponent(tag)}`;
-  };
-
-
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    e.currentTarget.src = 'https://placehold.co/400x400/0D1117/8B949E?text=Error';
+    e.currentTarget.src = `https://placehold.co/400x400/0D1117/8B949E?text=${encodeURIComponent(game.name_en)}`;
   };
 
   return (
-    <div onClick={handleCardClick} data-testid={`game-card-${game.id}`} ref={ref} className="cursor-pointer bg-secondary rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-glow hover:-translate-y-2 flex flex-col group">
-      <div className="relative w-full aspect-square">
+    <a href={`#/game/${game.slug}`} data-testid={`game-card-${game.id}`} ref={ref} className="relative aspect-square rounded-xl overflow-hidden shadow-lg group transition-all duration-300 hover:shadow-glow hover:-translate-y-1">
+        {/* Background Image */}
         <img
           src={game.thumbnailUrl}
           alt={language === 'ar' ? game.name_ar : game.name_en}
-          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
           loading="lazy"
           onError={handleImageError}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+        
+        {/* Gradient Overlay for Text Readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
 
-        <button onClick={handleFavorite} className="absolute top-2 right-2 z-10 p-1.5 bg-black/50 rounded-full text-white hover:text-red-500 hover:scale-110 transition-all duration-200">
+        {/* Favorite Button */}
+        <button onClick={handleFavorite} className="absolute top-3 right-3 z-20 p-1.5 bg-black/50 rounded-full text-white hover:text-red-500 hover:scale-110 transition-all duration-200">
             {isFavorite(game.id) ? <HeartIcon className="w-5 h-5 text-red-500" /> : <HeartOutlineIcon className="w-5 h-5" />}
         </button>
 
-        <div className="absolute bottom-2 left-2 text-white text-xs font-bold px-2 py-1 rounded-full">
-          {formatPlayCount(game.playCount, language)} {language === 'ar' ? 'لعبة' : 'plays'}
+        {/* Text Content */}
+        <div className="absolute inset-0 p-4 flex flex-col justify-end text-white">
+            <h3 className="text-lg font-bold text-shadow truncate">
+                {language === 'ar' ? game.name_ar : game.name_en}
+            </h3>
+            <div className="flex items-center gap-3 text-xs text-light-text text-shadow-sm opacity-90 mt-1">
+                <span>{CATEGORY_TRANSLATIONS[game.category][language]}</span>
+                <span className="opacity-50">•</span>
+                <span>{formatPlayCount(game.playCount, language)} {language === 'ar' ? 'لعبة' : 'plays'}</span>
+                {game.rating && (
+                    <>
+                        <span className="opacity-50">•</span>
+                        <Rating rating={game.rating} />
+                    </>
+                )}
+            </div>
         </div>
-      </div>
-      <div className="p-3 flex flex-col flex-grow">
-        <h3 className="text-base font-bold text-light-text truncate mb-1">
-          {language === 'ar' ? game.name_ar : game.name_en}
-        </h3>
-        <div className="flex items-center justify-between text-xs text-dark-text mb-2">
-           <span>{CATEGORY_TRANSLATIONS[game.category][language]}</span>
-           {game.rating && <Rating rating={game.rating} />}
+
+        {/* Hover Overlay with Glassmorphism and Play Icon */}
+        <div className="absolute inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <PlayIcon className="w-16 h-16 text-white/90 drop-shadow-lg" />
         </div>
-         <div className="flex flex-wrap gap-1 mb-3">
-          {game.tags.slice(0, 2).map(tag => (
-            <a key={tag} href={`#/search?q=${encodeURIComponent(tag)}`} onClick={(e) => handleTagClick(e, tag)} className="text-xs bg-gray-700 text-dark-text px-2 py-0.5 rounded-full hover:bg-accent hover:text-white transition-colors">
-                {tag}
-            </a>
-          ))}
-        </div>
-        <div className="mt-auto">
-          <button
-            onClick={(e) => { e.stopPropagation(); onPlay(game); }}
-            className="w-full flex items-center justify-center gap-2 bg-accent text-white font-bold py-2 px-4 rounded-lg transition-colors duration-300 hover:bg-accent-hover focus:outline-none focus:ring-2 focus:ring-accent-hover focus:ring-opacity-50"
-          >
-            <PlayIcon className="w-5 h-5" />
-            <span>{language === 'ar' ? 'العب الآن' : 'Play Now'}</span>
-          </button>
-        </div>
-      </div>
-    </div>
+
+        <style>{`
+            .text-shadow {
+                text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.9);
+            }
+            .text-shadow-sm {
+                text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.9);
+            }
+        `}</style>
+    </a>
   );
 };

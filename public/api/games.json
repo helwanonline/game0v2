@@ -113,6 +113,30 @@
       "category": "Classic", "tags": ["Retro", "Platformer", "DOS"],
       "thumbnailUrl": "https://placehold.co/400x400/161B22/C9D1D9?text=Prince+of+Persia", "playCount": 1500000,
       "gameUrl": "/dos/prince.jsdos", "engine": "dos", "rating": 3
+    },
+    {
+      "id": 32, "slug": "dino-run", "name_en": "Dino Run", "name_ar": "ركضة الديناصور",
+      "description_en": "The classic Chrome offline game, now playable online anytime!",
+      "description_ar": "لعبة متصفح كروم الكلاسيكية، متاحة الآن للعب أونلاين في أي وقت!",
+      "category": "OpenSource", "tags": ["Endless", "Arcade", "Classic"],
+      "thumbnailUrl": "https://placehold.co/400x400/161B22/C9D1D9?text=Dino+Run", "playCount": 9800000,
+      "gameUrl": "https://wayou.github.io/t-rex-game/", "engine": "html5", "rating": 2
+    },
+    {
+      "id": 33, "slug": "hextris", "name_en": "Hextris", "name_ar": "هيكستريس",
+      "description_en": "A fast-paced puzzle game inspired by Tetris. Rotate the hexagon to match colors.",
+      "description_ar": "لعبة ألغاز سريعة مستوحاة من تتريس. قم بتدوير الشكل السداسي لمطابقة الألوان.",
+      "category": "OpenSource", "tags": ["Puzzle", "Fast-Paced", "Arcade"],
+      "thumbnailUrl": "https://placehold.co/400x400/161B22/C9D1D9?text=Hextris", "playCount": 2100000,
+      "gameUrl": "https://hextris.github.io/hextris/", "engine": "html5", "rating": 3
+    },
+    {
+      "id": 34, "slug": "tower-defense", "name_en": "Tower Defense", "name_ar": "الدفاع عن البرج",
+      "description_en": "A classic open-source tower defense game. Place towers strategically to stop the creeps.",
+      "description_ar": "لعبة دفاع عن البرج كلاسيكية ومفتوحة المصدر. ضع الأبراج بشكل استراتيجي لإيقاف الأعداء.",
+      "category": "OpenSource", "tags": ["Strategy", "Tower Defense", "Classic"],
+      "thumbnailUrl": "https://placehold.co/400x400/161B22/C9D1D9?text=Tower+Defense", "playCount": 1800000,
+      "gameUrl": "https://paolo-francisco.github.io/tower-defense/", "engine": "html5", "rating": 2
     }
   ]
 }

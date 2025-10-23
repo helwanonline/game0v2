@@ -8,7 +8,7 @@ interface SEOProps {
   language: Language;
   keywords?: string[];
   imageUrl?: string;
-  type?: 'website' | 'article';
+  schema?: Record<string, any>;
 }
 
 export const SEO: React.FC<SEOProps> = ({
@@ -17,7 +17,7 @@ export const SEO: React.FC<SEOProps> = ({
   language,
   keywords = ['ألعاب', 'games', 'online games', 'ألعاب أونلاين', 'free games', 'ألعاب مجانية'],
   imageUrl,
-  type = 'website',
+  schema,
 }) => {
   useEffect(() => {
     const fullTitle = `${title} | 5199.online`;
@@ -35,7 +35,7 @@ export const SEO: React.FC<SEOProps> = ({
     // Open Graph (for Facebook, etc.)
     setMeta('og:title', fullTitle);
     setMeta('og:description', description);
-    setMeta('og:type', type);
+    setMeta('og:type', schema && schema['@type'] === 'Article' ? 'article' : 'website');
     setMeta('og:url', window.location.href);
     setMeta('og:site_name', '5199.online');
     setMeta('og:image', fullImageUrl);
@@ -49,23 +49,21 @@ export const SEO: React.FC<SEOProps> = ({
 
     
     // JSON-LD Structured Data
-    const schema = {
-        '@context': 'https://schema.org',
-        '@type': type === 'article' ? 'Article' : 'WebSite',
-        'name': fullTitle,
-        'description': description,
-        'url': window.location.href,
-        'image': fullImageUrl,
-        'inLanguage': language === 'ar' ? 'ar-SA' : 'en-US',
-    };
-    
     const jsonLdScript = document.getElementById('json-ld-schema');
     if(jsonLdScript) {
-        jsonLdScript.innerHTML = JSON.stringify(schema);
+      if (schema) {
+        const fullSchema = {
+          '@context': 'https://schema.org',
+          ...schema,
+        };
+        jsonLdScript.innerHTML = JSON.stringify(fullSchema, null, 2);
+      } else {
+        jsonLdScript.innerHTML = '';
+      }
     }
 
 
-  }, [title, description, language, keywords, imageUrl, type]);
+  }, [title, description, language, keywords, imageUrl, schema]);
 
   return null;
 };

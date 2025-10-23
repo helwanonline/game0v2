@@ -4,6 +4,7 @@ import App from './App';
 import { FavoritesProvider } from './context/FavoritesContext';
 import { GamePreloaderProvider } from './context/GamePreloaderContext';
 import { ErrorBoundary } from './components/ErrorBoundary';
+import { AuthProvider } from './context/AuthContext';
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {
@@ -14,11 +15,13 @@ const root = ReactDOM.createRoot(rootElement);
 root.render(
   <React.StrictMode>
     <ErrorBoundary>
-      <FavoritesProvider>
-        <GamePreloaderProvider>
-          <App />
-        </GamePreloaderProvider>
-      </FavoritesProvider>
+      <AuthProvider>
+        <FavoritesProvider>
+          <GamePreloaderProvider>
+            <App />
+          </GamePreloaderProvider>
+        </FavoritesProvider>
+      </AuthProvider>
     </ErrorBoundary>
   </React.StrictMode>
 );

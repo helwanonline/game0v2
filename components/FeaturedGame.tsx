@@ -3,6 +3,7 @@ import React from 'react';
 import type { Game, Language } from '../types';
 import { PlayIcon } from './icons/PlayIcon';
 
+// Fix: Added the `onPlay` prop to the interface to align with its usage in HomePage.
 interface FeaturedGameProps {
   game: Game;
   language: Language;
@@ -10,7 +11,6 @@ interface FeaturedGameProps {
 }
 
 export const FeaturedGame: React.FC<FeaturedGameProps> = ({ game, language, onPlay }) => {
-  const handlePlay = () => onPlay(game);
   const title = language === 'ar' ? game.name_ar : game.name_en;
   const description = language === 'ar' ? game.description_ar : game.description_en;
 
@@ -43,13 +43,14 @@ export const FeaturedGame: React.FC<FeaturedGameProps> = ({ game, language, onPl
             {description}
           </p>
         )}
-        <button
-          onClick={handlePlay}
-          className="flex items-center justify-center gap-2 bg-accent text-white font-bold py-3 px-8 rounded-lg transition-all duration-300 hover:bg-accent-hover hover:shadow-glow focus:outline-none focus:ring-4 focus:ring-accent-hover focus:ring-opacity-50 transform hover:scale-105"
+        <a
+          href={`#/game/${game.slug}`}
+          onClick={(e) => { e.preventDefault(); onPlay(game); }}
+          className="inline-flex items-center justify-center gap-2 bg-accent text-white font-bold py-3 px-8 rounded-lg transition-all duration-300 hover:bg-accent-hover hover:shadow-glow focus:outline-none focus:ring-4 focus:ring-accent-hover focus:ring-opacity-50 transform hover:scale-105"
         >
           <PlayIcon className="w-6 h-6" />
           <span className="text-lg">{language === 'ar' ? 'العب الآن' : 'Play Now'}</span>
-        </button>
+        </a>
       </div>
       <style>{`
         .text-shadow {

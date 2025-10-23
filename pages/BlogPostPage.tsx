@@ -48,8 +48,32 @@ export const BlogPostPage: React.FC<BlogPostPageProps> = ({ slug, language }) =>
     });
 
     const shareUrl = `${window.location.origin}${window.location.pathname}#/blog/${post.slug}`;
-    const shareTitle = title;
     const description = language === 'ar' ? post.excerpt_ar : post.excerpt_en;
+    
+    const articleSchema = {
+      '@type': 'Article',
+      'mainEntityOfPage': {
+        '@type': 'WebPage',
+        '@id': shareUrl,
+      },
+      'headline': title,
+      'description': description,
+      'image': post.imageUrl.startsWith('http') ? post.imageUrl : `${window.location.origin}${post.imageUrl}`,
+      'author': {
+        '@type': 'Person',
+        'name': post.author,
+      },
+      'publisher': {
+        '@type': 'Organization',
+        'name': '5199.online',
+        'logo': {
+          '@type': 'ImageObject',
+          'url': 'https://i.postimg.cc/qRDFtvc0/5199logo.png',
+        },
+      },
+      'datePublished': post.publishedAt,
+    };
+
 
     const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
         e.currentTarget.src = 'https://placehold.co/1280x720/0D1117/8B949E?text=Image+Not+Found';
@@ -62,7 +86,7 @@ export const BlogPostPage: React.FC<BlogPostPageProps> = ({ slug, language }) =>
                 description={description}
                 imageUrl={post.imageUrl}
                 language={language}
-                type="article"
+                schema={articleSchema}
             />
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <article className="max-w-4xl mx-auto">
@@ -87,7 +111,7 @@ export const BlogPostPage: React.FC<BlogPostPageProps> = ({ slug, language }) =>
                             onError={handleImageError}
                         />
                         <div className="flex justify-center gap-2">
-                            <ShareButtons url={shareUrl} title={shareTitle} />
+                            <ShareButtons url={shareUrl} title={title} />
                         </div>
                     </header>
                     <div className="prose prose-invert lg:prose-xl mx-auto text-light-text prose-p:leading-relaxed prose-headings:text-light-text">

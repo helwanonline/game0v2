@@ -32,9 +32,17 @@ export const CategoryPage: React.FC<CategoryPageProps> = ({ language, onPlay, ca
 
   const pageDescription = language === 'ar' ? `تصفح أفضل الألعاب في قسم ${pageTitle}` : `Browse the best games in the ${pageTitle} section`;
 
+  const pageSchema = {
+    '@type': 'WebPage',
+    'name': pageTitle,
+    'description': pageDescription,
+    'url': window.location.href,
+  };
+
+
   return (
     <>
-      <SEO title={pageTitle} description={pageDescription} language={language} />
+      <SEO title={pageTitle} description={pageDescription} language={language} schema={pageSchema} />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="text-center py-4 md:py-8">
           <h1 className="text-3xl md:text-4xl font-extrabold text-light-text mb-4">

@@ -1,11 +1,13 @@
 import { useState, useEffect, useCallback } from 'react';
 import type { Game } from '../types';
 import { supabase } from '../lib/supabaseClient';
+import { checkUrl } from '../lib/gameHealth';
 
 export const useGames = () => {
   const [games, setGames] = useState<Game[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [unavailableGameIds, setUnavailableGameIds] = useState<Set<number>>(new Set());
 
   const fetchGames = useCallback(async () => {
     setLoading(true);
@@ -21,7 +23,6 @@ export const useGames = () => {
         if (supabaseError) throw new Error(`Supabase error: ${supabaseError.message}`);
         data = supabaseData as Game[];
       } else {
-        // Fallback to local JSON
         const response = await fetch('/api/games.json');
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const jsonData = await response.json();
@@ -30,22 +31,36 @@ export const useGames = () => {
 
       if (!data) throw new Error("No game data found.");
       
-      setGames(data);
+      const availableGames = data.filter(game => !unavailableGameIds.has(game.id));
+      setGames(availableGames);
+
+      // Asynchronously check game health in the background
+      data.forEach(async (game) => {
+        if (game.engine === 'html5') { // Only check HTML5 games for now
+            const isAvailable = await checkUrl(game.gameUrl);
+            if (!isAvailable) {
+                setUnavailableGameIds(prev => new Set(prev).add(game.id));
+            }
+        }
+      });
+
     } catch (e) {
-      if (e instanceof Error) {
-        setError(e.message);
-      } else {
-        setError('An unknown error occurred.');
-      }
+      const message = e instanceof Error ? e.message : 'An unknown error occurred.';
+      setError(message);
       console.error("Failed to fetch games:", e);
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [unavailableGameIds]);
+
+  useEffect(() => {
+    // This effect runs whenever unavailableGameIds changes, to filter the main games list
+    setGames(prevGames => prevGames.filter(game => !unavailableGameIds.has(game.id)));
+  }, [unavailableGameIds]);
 
   useEffect(() => {
     fetchGames();
-  }, [fetchGames]);
+  }, []); // Fetch only on initial mount
 
   return { games, loading, error, refetch: fetchGames };
 };

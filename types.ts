@@ -1,4 +1,5 @@
 import React from 'react';
+import type { User as SupabaseUser } from '@supabase/supabase-js';
 import { ActionIcon } from './components/icons/ActionIcon';
 import { AdventureIcon } from './components/icons/AdventureIcon';
 import { PuzzleIcon } from './components/icons/PuzzleIcon';
@@ -7,6 +8,8 @@ import { RacingIcon } from './components/icons/RacingIcon';
 import { SparklesIcon } from './components/icons/SparklesIcon';
 import { StrategyIcon } from './components/icons/StrategyIcon';
 import { ClassicIcon } from './components/icons/ClassicIcon';
+import { CodeIcon } from './components/icons/CodeIcon';
+
 
 export enum Category {
   Action = 'Action',
@@ -17,6 +20,7 @@ export enum Category {
   Girls = 'Girls',
   Strategy = 'Strategy',
   Classic = 'Classic',
+  OpenSource = 'OpenSource'
 }
 
 export const CATEGORY_TRANSLATIONS: Record<Category, { en: string; ar: string }> = {
@@ -28,6 +32,7 @@ export const CATEGORY_TRANSLATIONS: Record<Category, { en: string; ar: string }>
   [Category.Girls]: { en: 'Girls', ar: 'بنات' },
   [Category.Strategy]: { en: 'Strategy', ar: 'استراتيجية' },
   [Category.Classic]: { en: 'Classic', ar: 'كلاسيك' },
+  [Category.OpenSource]: { en: 'Open Source', ar: 'مفتوحة المصدر' }
 };
 
 export const CATEGORY_DETAILS: Record<Category, { en: string; ar: string; slug: string; icon: React.FC<{className?: string}> }> = {
@@ -39,6 +44,7 @@ export const CATEGORY_DETAILS: Record<Category, { en: string; ar: string; slug: 
   [Category.Girls]: { en: 'Girls', ar: 'بنات', slug: 'girls-games', icon: SparklesIcon },
   [Category.Strategy]: { en: 'Strategy', ar: 'استراتيجية', slug: 'strategy-games', icon: StrategyIcon },
   [Category.Classic]: { en: 'Classic', ar: 'كلاسيك', slug: 'classic-games', icon: ClassicIcon },
+  [Category.OpenSource]: { en: 'Open Source', ar: 'مفتوحة المصدر', slug: 'open-source-games', icon: CodeIcon },
 };
 
 
@@ -74,3 +80,5 @@ export type Post = {
   tags: string[];
   readingTime: number; // in minutes
 };
+
+export type User = SupabaseUser;

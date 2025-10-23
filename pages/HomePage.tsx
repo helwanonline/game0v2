@@ -26,6 +26,18 @@ export const HomePage: React.FC<HomePageProps> = ({ language, onPlay }) => {
   const popularGames = games.slice(0, 12);
   // New games are sorted by ID descending to simulate "newest first"
   const newGames = [...games].sort((a, b) => b.id - a.id).slice(0, 12);
+  
+  const siteUrl = window.location.origin + window.location.pathname;
+  const webSiteSchema = {
+    '@type': 'WebSite',
+    'url': siteUrl,
+    'name': '5199.online',
+    'potentialAction': {
+      '@type': 'SearchAction',
+      'target': `${siteUrl}#/search?q={search_term_string}`,
+      'query-input': 'required name=search_term_string',
+    },
+  };
 
   return (
     <>
@@ -33,6 +45,7 @@ export const HomePage: React.FC<HomePageProps> = ({ language, onPlay }) => {
         title={language === 'ar' ? 'الرئيسية - العب أفضل الألعاب المجانية' : 'Home - Play the Best Free Games'}
         description={language === 'ar' ? 'مئات الألعاب المجانية أونلاين تعمل على جميع الأجهزة بسرعة وسلاسة. اكتشف ألعاب جديدة يوميًا!' : 'Hundreds of free online games that work on all devices. Discover new games daily!'}
         language={language}
+        schema={webSiteSchema}
       />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 space-y-12 py-8">
         

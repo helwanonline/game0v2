@@ -1,16 +1,25 @@
-
 import React from 'react';
-import type { Language } from '../types';
+import { CategoryPage } from './CategoryPage';
+import type { Game, Language } from '../types';
+import { Category } from '../types';
 
-export const OpenSourceGamesPage: React.FC<{language: Language}> = ({language}) => (
-    <div className="container mx-auto text-center p-10 flex flex-col items-center justify-center h-full min-h-[50vh]">
-        <h1 className="text-4xl font-bold text-accent">
-            {language === 'ar' ? 'ألعاب مفتوحة المصدر' : 'Open Source Games'}
-        </h1>
-        <p className="mt-4 text-dark-text text-lg max-w-md">
-            {language === 'ar' ? 'سيتم إضافة هذا القسم قريبًا، مع مجموعة رائعة من الألعاب المجانية ومفتوحة المصدر!' : 'This section is coming soon, with a great collection of free and open-source games!'}
-        </p>
-    </div>
-);
+interface OpenSourceGamesPageProps {
+  language: Language;
+  onPlay: (game: Game) => void;
+}
+
+export const OpenSourceGamesPage: React.FC<OpenSourceGamesPageProps> = ({ language, onPlay }) => {
+  const openSourceCategories = [Category.OpenSource];
+  const pageTitle = language === 'ar' ? 'ألعاب مفتوحة المصدر' : 'Open Source Games';
+
+  return (
+    <CategoryPage
+      language={language}
+      onPlay={onPlay}
+      categories={openSourceCategories}
+      pageTitleOverride={pageTitle}
+    />
+  );
+};
 
 export default OpenSourceGamesPage;

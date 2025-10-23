@@ -1,8 +1,10 @@
 
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import type { Language } from '../types';
 import { SearchIcon } from './icons/SearchIcon';
 import { SparklesIcon } from './icons/SparklesIcon';
+import { AuthContext } from '../context/AuthContext';
+import { UserMenu } from './UserMenu';
 
 interface HeaderProps {
     language: Language;
@@ -11,6 +13,7 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ language, setLanguage, currentRoute }) => {
+    const { user } = useContext(AuthContext);
     const [searchQuery, setSearchQuery] = useState('');
     const [isSearchVisible, setIsSearchVisible] = useState(false);
 
@@ -47,6 +50,7 @@ export const Header: React.FC<HeaderProps> = ({ language, setLanguage, currentRo
         { href: '#/popular', ar: 'الأكثر لعبًا', en: 'Popular' },
         { href: '#/favorites', ar: 'مفضلتي', en: 'My Favorites' },
         { href: '#/for-you', ar: 'لأجلك', en: 'For You', icon: <SparklesIcon className="w-4 h-4 text-yellow-400" /> },
+        { href: '#/ai-studio', ar: 'استوديو AI', en: 'AI Studio', icon: <SparklesIcon className="w-4 h-4 text-purple-400" /> },
         { href: '#/blog', ar: 'المدونة', en: 'Blog' }
     ];
 
@@ -56,7 +60,7 @@ export const Header: React.FC<HeaderProps> = ({ language, setLanguage, currentRo
                 <div className="flex items-center justify-between h-16">
                     <div className="flex items-center">
                         <a href="#/" className="flex-shrink-0">
-                           <img className="h-10 w-auto" src="https://i.ibb.co/r2zLLDB/5199-online.png" alt="5199.online Logo" />
+                           <img className="h-10 w-auto" src="https://i.postimg.cc/qRDFtvc0/5199logo.png" alt="5199.online Logo" />
                         </a>
                         <nav className="hidden md:flex items-baseline space-x-4 rtl:space-x-reverse mx-4">
                             {navLinks.map(link => (
@@ -85,9 +89,16 @@ export const Header: React.FC<HeaderProps> = ({ language, setLanguage, currentRo
                                 </form>
                             )}
                         </div>
+                        {user ? (
+                           <UserMenu language={language} />
+                        ) : (
+                            <a href="#/auth" className="bg-accent text-white font-bold py-2 px-4 rounded-lg hover:bg-accent-hover transition-colors duration-200 text-sm">
+                                {language === 'ar' ? 'تسجيل الدخول' : 'Login'}
+                            </a>
+                        )}
                         <button
                             onClick={toggleLanguage}
-                            className="bg-primary text-accent font-bold py-2 px-4 rounded-lg hover:bg-gray-800 transition-colors duration-200"
+                            className="bg-primary text-accent font-bold py-2 px-4 rounded-lg hover:bg-gray-800 transition-colors duration-200 text-sm"
                         >
                             {language === 'ar' ? 'EN' : 'عربي'}
                         </button>

@@ -2,7 +2,6 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
-import { GamePlayerModal } from './components/GamePlayerModal';
 import { Spinner } from './components/Spinner';
 
 import type { Language, Game } from './types';
@@ -17,12 +16,16 @@ const OpenSourceGamesPage = lazy(() => import('./pages/OpenSourceGamesPage'));
 const BlogPage = lazy(() => import('./pages/BlogPage'));
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
 const BoysGamesPage = lazy(() => import('./pages/BoysGamesPage'));
+const GirlsGamesPage = lazy(() => import('./pages/GirlsGamesPage'));
 const FavoritesPage = lazy(() => import('./pages/FavoritesPage'));
 const ForYouPage = lazy(() => import('./pages/ForYouPage'));
 const SearchPage = lazy(() => import('./pages/SearchPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
-const DosGamePlayerPage = lazy(() => import('./pages/DosGamePlayerPage'));
+const GameDetailPage = lazy(() => import('./pages/GameDetailPage'));
+const AIStudioPage = lazy(() => import('./pages/AIStudioPage'));
+const AuthPage = lazy(() => import('./pages/AuthPage'));
+
 
 const accentColors = ['#2F81F7', '#3FB950', '#F7B92F', '#A371F7', '#E85382'];
 
@@ -42,8 +45,7 @@ function lightenHexColor(hex: string, percent: number): string {
 function App() {
   const [language, setLanguage] = useState<Language>(() => (localStorage.getItem('language') as Language) || 'ar');
   const [route, setRoute] = useState(window.location.hash || '#/');
-  const [selectedGame, setSelectedGame] = useState<Game | null>(null);
-
+  
   useEffect(() => {
     document.documentElement.lang = language;
     document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
@@ -81,17 +83,17 @@ function App() {
   }, []);
   
   const handlePlayGame = (game: Game) => {
-    if (game.engine === 'dos') {
-      window.location.hash = `#/games/${game.slug}`;
-    } else {
-      setSelectedGame(game);
-    }
+    window.location.hash = `#/game/${game.slug}`;
   };
-  const handleCloseModal = () => setSelectedGame(null);
 
   const renderPage = () => {
     const path = route.slice(1) || '/';
     
+    if (path.startsWith('/game/')) {
+        const slug = path.substring('/game/'.length);
+        if (slug) return <GameDetailPage slug={slug} language={language} />;
+    }
+
     if (path.startsWith('/blog/')) {
         const slug = path.substring('/blog/'.length);
         if (slug) return <BlogPostPage slug={slug} language={language} />;
@@ -103,23 +105,21 @@ function App() {
       return <SearchPage query={query} language={language} onPlay={handlePlayGame} />;
     }
 
-    if (path.startsWith('/games/')) {
-        const slug = path.substring('/games/'.length);
-        if (slug) return <DosGamePlayerPage slug={slug} language={language} onPlay={handlePlayGame} />;
-    }
-
     switch (path) {
         case '/': return <HomePage language={language} onPlay={handlePlayGame} />;
         case '/new-games': return <GenericGamesPage language={language} onPlay={handlePlayGame} pageTitleKey='newGames' gameSorter={(a, b) => b.id - a.id} />;
         case '/popular': return <GenericGamesPage language={language} onPlay={handlePlayGame} pageTitleKey='popularGames' gameSorter={(a, b) => b.playCount - a.playCount} />;
         case '/monthly-games': return <MonthlyGamesPage language={language} onPlay={handlePlayGame} />;
         case '/boys-games': return <BoysGamesPage language={language} onPlay={handlePlayGame} />;
-        case '/open-source-games': return <OpenSourceGamesPage language={language} />;
+        case '/girls-games': return <GirlsGamesPage language={language} onPlay={handlePlayGame} />;
+        case '/open-source-games': return <OpenSourceGamesPage language={language} onPlay={handlePlayGame} />;
         case '/blog': return <BlogPage language={language} />;
         case '/favorites': return <FavoritesPage language={language} onPlay={handlePlayGame} />;
         case '/for-you': return <ForYouPage language={language} onPlay={handlePlayGame} />;
         case '/about': return <AboutPage language={language} />;
         case '/contact': return <ContactPage language={language} />;
+        case '/ai-studio': return <AIStudioPage language={language} />;
+        case '/auth': return <AuthPage language={language} />;
     }
 
     const category = (Object.keys(CATEGORY_DETAILS) as Category[]).find(cat => CATEGORY_DETAILS[cat].slug === path.substring(1));
@@ -139,13 +139,6 @@ function App() {
         </Suspense>
       </main>
       <Footer language={language} />
-      <GamePlayerModal 
-        isOpen={!!selectedGame}
-        game={selectedGame}
-        language={language}
-        onClose={handleCloseModal}
-        onPlay={handlePlayGame}
-      />
     </div>
   );
 }
